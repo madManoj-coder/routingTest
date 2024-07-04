@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2 text-right mb-2">
+        <button class="btn btn-outline-primary" routerLink="/products/addProduct">Add Product</button>
+    </div>
+
+    <div class="col-md-4">
+        <ul class="list-group" *ngIf="prodArr; else noProd">
+            <li class="list-group-item" 
+            *ngFor="let prod of prodArr"
+            (click)="onGetSelectedId(prod.id)"
+            [ngClass]="{
+                active : prod.id === selectedId
+            }"
+            [routerLink]="[prod.id]"
+            [queryParams]="{
+                canEdit : prod.canReturn
+            }"
+            >
+                The product is <strong>{{prod.pName}}</strong> with the status <strong>{{prod.pStatus}}</strong>
+            </li>
+        </ul>
+        <ng-template #noProd>
+            <p class="alert alert-warning">No products is added yet !!!</p>
+        </ng-template>
+    </div>
+
+    <div class="col-md-8">
+        <router-outlet></router-outlet>
+    </div>
+</div>

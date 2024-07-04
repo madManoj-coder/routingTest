@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2 text-right mb-2">
+        <button class="btn btn-outline-info" routerLink="/users/addUser">Add User</button>
+    </div>
+
+    <div class="col-md-4">
+        <ul class="list-group" *ngIf="userArr;else noUser">
+            <li class="list-group-item" (click)="getselectedId(user.userId)" 
+            [ngClass]="{
+                active : user.userId === selectedId
+            }" 
+            [routerLink]="['/users', user.userId]" 
+            [queryParams]="{
+                userRole : user.userRole
+            }" 
+            *ngFor="let user of userArr">
+                The user is <strong>{{user.username}}</strong> with role <strong>{{user.userRole}}</strong>
+            </li>
+        </ul>
+        <ng-template #noUser>
+            <p class="alert alert-warning">No users is addes yet !!!</p>
+        </ng-template>
+
+    </div>
+    
+    <div class="col-md-8">
+        <router-outlet></router-outlet>
+    </div>
+</div>
